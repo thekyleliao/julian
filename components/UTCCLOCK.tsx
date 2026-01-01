@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { calculateJulianDate, calculateModifiedJulianDate } from '@/lib/julianDate';
 
 export default function UTCCLOCK() {
@@ -46,13 +47,19 @@ export default function UTCCLOCK() {
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-black text-white font-mono">
+      <div className="flex min-h-screen items-center justify-center bg-black text-white font-mono relative">
         <div className="text-center">
           <div className="text-8xl mb-8">--:--:--</div>
           <div className="text-2xl mb-4">---- -- --</div>
           <div className="text-xl">JD: ----</div>
           <div className="text-xl">MJD: ----</div>
         </div>
+        <Link 
+          href="/radio"
+          className="absolute bottom-8 right-8 text-xs border border-white px-3 py-1.5 hover:bg-white hover:text-black transition-colors uppercase tracking-wide"
+        >
+          Radio
+        </Link>
       </div>
     );
   }
@@ -63,7 +70,7 @@ export default function UTCCLOCK() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black text-white font-mono">
+    <div className="flex min-h-screen items-center justify-center bg-black text-white font-mono relative">
       <div className="text-center">
         {/* Large UTC Clock */}
         <div className="text-8xl mb-8 tracking-tighter">{utcTime}</div>
@@ -83,6 +90,14 @@ export default function UTCCLOCK() {
           </div>
         </div>
       </div>
+      
+      {/* Radio Link Button */}
+      <Link 
+        href="/radio"
+        className="absolute bottom-8 right-8 text-xs border border-white px-3 py-1.5 hover:bg-white hover:text-black transition-colors uppercase tracking-wide"
+      >
+        Radio
+      </Link>
     </div>
   );
 }
